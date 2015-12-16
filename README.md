@@ -32,6 +32,7 @@ help displays the available options to pass instead of "--help":
 ## See also
 [Wikibase data model](https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON)
 
-[![Build Status](https://travis-ci.org/physikerwelt/WikidataListGenerator.svg?branch=travis)](https://travis-ci.org/physikerwelt/WikidataListGenerator)
-[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)](maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/)
-[![Coverage Status](https://coveralls.io/repos/physikerwelt/WikidataListGenerator/badge.svg)](https://coveralls.io/r/physikerwelt/WikidataListGenerator)
+## Build status et al
+[![Build Status](https://travis-ci.org/physikerwelt/WikidataListGenerator.svg?branch=master)](https://travis-ci.org/physikerwelt/WikidataListGenerator)
+[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/physikerwelt/WikidataListGenerator/badge.svg?branch=master&service=github)](https://coveralls.io/github/physikerwelt/WikidataListGenerator?branch=master)
