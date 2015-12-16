@@ -1,19 +1,21 @@
 package com.formulasearchengine.wikidatalistgenerator;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * Created by Moritz on 16.12.2015.
  */
 public class CliConfigTest {
+	@Rule
+	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
 	@Test
 	public void testFromEmpty() throws Exception {
@@ -39,4 +41,10 @@ public class CliConfigTest {
 		assertTrue( cfg.getIn() instanceof FileInputStream );
 	}
 
+	@Test
+	public void testHelp() {
+		exit.expectSystemExitWithStatus(0);
+		String[] args = { "--help" };
+		CliConfig cfg = CliConfig.from( args );
+	}
 }
