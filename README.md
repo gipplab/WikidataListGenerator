@@ -29,6 +29,11 @@ help displays the available options to pass instead of "--help":
        path to output file
 ```
 
+
+## Runtime
+The process seems to be disk bound. With a standard hdd (non ssd) it took about 6 minutes to generate the list.
+Probably the time to read the file once.
+
 ## See also
 [Wikibase data model](https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON)
 

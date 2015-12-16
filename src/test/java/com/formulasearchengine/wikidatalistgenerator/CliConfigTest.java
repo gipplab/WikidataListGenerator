@@ -45,6 +45,6 @@ public class CliConfigTest {
 	public void testHelp() {
 		exit.expectSystemExitWithStatus(0);
 		String[] args = { "--help" };
-		CliConfig cfg = CliConfig.from( args );
+		CliConfig.from( args );
 	}
 }
