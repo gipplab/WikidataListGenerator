@@ -12,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Moritz on 16.12.2015.
  */
-public class ItemStremExtractorTest {
+public class ItemStreamExtractorTest {
 
 	@Test
 	public void testExtract() throws Exception {
 		InputStream is = getClass().getResourceAsStream( "sample-q1.json" );
-		ItemStremExtractor extractor = new ItemStremExtractor( "en", false );
+		ItemStreamExtractor extractor = new ItemStreamExtractor( "en", false );
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		extractor.extract( is, baos );
 		assertEquals( "universe,Q1\n", baos.toString() );
@@ -25,7 +25,7 @@ public class ItemStremExtractorTest {
 	@Test
 	public void testExtractAliases() throws Exception {
 		InputStream is = getClass().getResourceAsStream( "sample-q1.json" );
-		ItemStremExtractor extractor = new ItemStremExtractor( "en", true );
+		ItemStreamExtractor extractor = new ItemStreamExtractor( "en", true );
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		extractor.extract( is, baos );
 		final String result = baos.toString();

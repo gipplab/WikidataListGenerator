@@ -16,14 +16,14 @@ import java.util.List;
 /**
  * Created by Moritz on 16.12.2015.
  */
-public class ItemStremExtractor {
+public class ItemStreamExtractor {
 	final JsonFactory factory = new JsonFactory();
 	final String language;
 	final boolean useAlias;
 	String ItemId;
 
 
-	public ItemStremExtractor(String language, boolean useAlias) {
+	public ItemStreamExtractor(String language, boolean useAlias) {
 		this.language = language;
 		this.useAlias = useAlias;
 	}
