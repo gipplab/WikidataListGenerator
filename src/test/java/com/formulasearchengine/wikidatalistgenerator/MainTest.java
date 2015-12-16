@@ -32,4 +32,9 @@ public class MainTest {
 	}
 
 
+	@Test
+	public void testConstructor() throws Exception {
+		// Only test default constructor
+		new Main();
+	}
 }

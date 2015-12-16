@@ -21,11 +21,18 @@ public class CliConfig {
 	@Parameter(names = {"-a", "--aliases"})
 	private boolean aliases = false;
 
+	@Parameter(names = "--help", help = true)
+	private boolean help = false;
+
 	public static CliConfig from(String[] args) {
 		CliConfig config = new CliConfig( );
 		JCommander commander = new JCommander();
 		commander.addObject(config);
 		commander.parse(args);
+		if ( config.help ){
+			commander.usage();
+			System.exit( 0 );
+		}
 		return config;
 	}
 
