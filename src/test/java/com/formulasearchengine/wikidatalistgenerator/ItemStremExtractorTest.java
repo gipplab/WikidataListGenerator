@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,6 +20,16 @@ public class ItemStremExtractorTest {
 		ItemStremExtractor extractor = new ItemStremExtractor( "en", false );
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		extractor.extract( is, baos );
-		assertEquals( "Q1", baos.toString() );
+		assertEquals( "universe,Q1\n", baos.toString() );
+	}
+	@Test
+	public void testExtractAliases() throws Exception {
+		InputStream is = getClass().getResourceAsStream( "sample-q1.json" );
+		ItemStremExtractor extractor = new ItemStremExtractor( "en", true );
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		extractor.extract( is, baos );
+		final String result = baos.toString();
+		assertEquals( 6, result.split( "\n" ).length );
+		assertThat(result, containsString("the universe"));
 	}
 }

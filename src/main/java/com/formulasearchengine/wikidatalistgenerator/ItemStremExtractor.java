@@ -3,10 +3,13 @@ package com.formulasearchengine.wikidatalistgenerator;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class ItemStremExtractor {
 				emitError( "Unexpected token " + jParser.getText() );
 			}
 		}
+		out.flush();
 	}
 
 	private void processItem(JsonParser jParser, OutputStream out) throws IOException {
@@ -64,6 +68,13 @@ public class ItemStremExtractor {
 					break;
 				case "aliases":
 					if ( useAlias ){
+						jParser.nextToken();
+						if (jParser.getCurrentToken() == JsonToken.START_OBJECT ){
+							jParser.nextToken();
+							extractAlias( jParser, titles );
+						} else {
+							emitError( "expects object start after aliases" );
+						}
 						break;
 					}
 				default:
@@ -75,7 +86,13 @@ public class ItemStremExtractor {
 			}
 		}
 		if ( id != null ){
-			out.write( id.getBytes() );
+			OutputStreamWriter w = new OutputStreamWriter( out );
+			CSVPrinter printer = CSVFormat.DEFAULT.withRecordSeparator("\n").print( w );
+			for (String t: titles) {
+				String[] output  = {t.toLowerCase().trim(), id};
+				printer.printRecord( output );
+			}
+			w.flush();
 		}
 	}
 
@@ -96,14 +113,42 @@ public class ItemStremExtractor {
 					}
 				}
 			} else {
-				emitError( "language is expected to be an array" );
+				emitError( "language is expected to be an object" );
 			}
 		} else {
 			jParser.nextToken();
-			skipStruct( jParser, JsonToken.START_OBJECT );
+			skipBlock( jParser );
 		}
 		jParser.nextToken();
 		extractLabel( jParser, titles );
+	}
+	private void extractAlias(JsonParser jParser, List<String> titles) throws IOException {
+		if (jParser.getCurrentToken() == JsonToken.END_OBJECT) {
+			return;
+		}
+		if ( jParser.getCurrentToken() != JsonToken.FIELD_NAME ){
+			emitError( "expects field name on top level object" );
+		}
+		if (language.equals( jParser.getCurrentName() )) {
+			jParser.nextToken();
+			if (jParser.getCurrentToken() == JsonToken.START_ARRAY) {
+				while ( jParser.nextToken() != JsonToken.END_ARRAY ){
+					while (jParser.nextToken() != JsonToken.END_OBJECT) {
+						if (jParser.getCurrentName().equals( "value" )) {
+							jParser.nextToken();
+							titles.add( jParser.getValueAsString() );
+						}
+					}
+				}
+			} else {
+				emitError( "aliases is expected to be an array" );
+			}
+		} else {
+			jParser.nextToken();
+			skipBlock( jParser );
+		}
+		jParser.nextToken();
+		extractAlias( jParser, titles );
 	}
 
 	private void skipBlock(JsonParser jParser) throws IOException {
