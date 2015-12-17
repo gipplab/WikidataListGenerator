@@ -1,4 +1,5 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -7,7 +8,8 @@
     <version>1.0.1-SNAPSHOT</version>
 
     <name>Wikidata List Generator</name>
-    <description>Extracts a list of Wikipedia article titles and the corresponding wikidata items.</description>
+    <description>Extracts a list of Wikipedia article titles and the corresponding wikidata items.
+    </description>
     <url>http://www.formulasearchengine.com/WikidataListGenerator</url>
     <licenses>
         <license>
@@ -25,7 +27,8 @@
     </developers>
     <scm>
         <connection>scm:git:git@github.com:physikerwelt/WikidataListGenerator.git</connection>
-        <developerConnection>scm:git:git@github.com:physikerwelt/WikidataListGenerator.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:physikerwelt/WikidataListGenerator.git
+        </developerConnection>
         <url>git@github.com:physikerwelt/WikidataListGenerator.git</url>
     </scm>
     <properties>
@@ -155,11 +158,12 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
+                            <configLocation>google_checks.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
-                            <failsOnError>false</failsOnError>
+                            <failsOnError>true</failsOnError>
                             <linkXRef>false</linkXRef>
-                            <skip>true</skip>
+                            <skip>false</skip>
                         </configuration>
                         <goals>
                             <goal>check</goal>

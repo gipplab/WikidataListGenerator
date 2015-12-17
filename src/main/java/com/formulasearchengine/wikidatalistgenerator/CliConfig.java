@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * Created by Moritz on 16.12.2015.
  */
-public class CliConfig {
+final public class CliConfig {
     @Parameter(names = {"-i", "--input"}, description = "path to the file with the wikidata json dump")
     protected String inFile;
 
