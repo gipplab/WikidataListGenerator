@@ -48,6 +48,7 @@ public class ItemStreamExtractor {
 		// We can not expect that the id attribute comes first, so we have to store all titles
 		// until the whole entry is read
 		List<String> titles = new ArrayList<>(  );
+		Boolean item = false;
 		while ( jParser.nextToken() != JsonToken.END_OBJECT ) {
 			if ( jParser.getCurrentToken() != JsonToken.FIELD_NAME ){
 				emitError( "expects field name on top level object" );
@@ -64,6 +65,12 @@ public class ItemStreamExtractor {
 						extractLabel( jParser, titles );
 					} else {
 						emitError( "expects object start after labels" );
+					}
+					break;
+				case "type":
+					jParser.nextToken();
+					if ("item".equals( jParser.getValueAsString() )){
+						item = true;
 					}
 					break;
 				case "aliases":
@@ -85,7 +92,7 @@ public class ItemStreamExtractor {
 					// Skip value
 			}
 		}
-		if ( id != null ){
+		if ( item && id != null ){
 			OutputStreamWriter w = new OutputStreamWriter( out );
 			CSVPrinter printer = CSVFormat.DEFAULT.withRecordSeparator("\n").print( w );
 			for (String t: titles) {
