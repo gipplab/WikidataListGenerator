@@ -181,6 +181,7 @@ public class ItemStreamExtractor {
 		}
 	}
 
+	@TestIgnore
 	private void emitError(String message) throws IOException {
 		throw new IOException(message);
 	}

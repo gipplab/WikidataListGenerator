@@ -126,6 +126,10 @@
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
+                    <instrumentation>
+                        <ignoreMethodAnnotation annotationName="com.formulasearchengine.wikidatalistgenerator.TestIgnore"/>
+                    </instrumentation>
+                    <check/>
                 </configuration>
             </plugin>
             <plugin>
