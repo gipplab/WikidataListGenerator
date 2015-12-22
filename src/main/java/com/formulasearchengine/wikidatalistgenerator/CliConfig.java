@@ -3,7 +3,15 @@ package com.formulasearchengine.wikidatalistgenerator;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
-import java.io.*;
+import org.apache.commons.io.FilenameUtils;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Created by Moritz on 16.12.2015.
@@ -57,9 +65,13 @@ public final class CliConfig {
     return System.out;
   }
 
-  public InputStream getIn() throws FileNotFoundException {
+  public InputStream getIn() throws IOException {
     if (inFile != null) {
-      return new FileInputStream(inFile);
+      FileInputStream fis = new FileInputStream(inFile);
+      if ( FilenameUtils.getExtension(inFile).equals("gz")) {
+        return new GZIPInputStream(fis);
+      }
+      return fis;
     }
     return System.in;
   }

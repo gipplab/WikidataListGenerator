@@ -17,6 +17,16 @@ public class MainTest {
   @Test
   public void testMain() throws Exception {
     final String inFile = TestHelper.getSampleResourcePath();
+    mainTest(inFile);
+  }
+
+  @Test
+  public void testMainGZ() throws Exception {
+    final String inFile = TestHelper.getGzSampleResourcePath();
+    mainTest(inFile);
+  }
+
+  private void mainTest(String inFile) throws Exception {
     final File temp = TestHelper.getTempFile();
     final String outFile = temp.getAbsolutePath();
     String[] args = {"-i", inFile, "-o", outFile, "-l", "de", "-a"};
