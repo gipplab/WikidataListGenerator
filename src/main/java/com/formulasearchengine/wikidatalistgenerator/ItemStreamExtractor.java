@@ -21,12 +21,23 @@ public class ItemStreamExtractor {
   final JsonFactory factory = new JsonFactory();
   final String language;
   final boolean useAlias;
+  final boolean useDescriptions;
+  final boolean useNumeric;
   String ItemId;
 
 
   public ItemStreamExtractor(String language, boolean useAlias) {
     this.language = language;
     this.useAlias = useAlias;
+    useDescriptions = false;
+    useNumeric = false;
+  }
+
+  public ItemStreamExtractor(CliConfig config) {
+    this.language = config.getLang();
+    this.useAlias = config.isAliases();
+    useDescriptions = config.isDescriptions();
+    useNumeric = config.isNumericItems();
   }
 
   public void extract(InputStream in, OutputStream out) throws IOException {
@@ -58,6 +69,9 @@ public class ItemStreamExtractor {
         case "id":
           jParser.nextToken();
           id = jParser.getValueAsString();
+          if (useNumeric) {
+            id = id.replace("Q", "").trim();
+          }
           break;
         case "labels":
           jParser.nextToken();

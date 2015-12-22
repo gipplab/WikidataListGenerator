@@ -21,6 +21,12 @@ public final class CliConfig {
   @Parameter(names = {"-a", "--aliases"})
   private boolean aliases = false;
 
+  @Parameter(names = {"-d", "--descriptions"}, description = "Add a third column with the descriptions.")
+  private boolean descriptions = false;
+
+  @Parameter(names = {"-n", "--numericItems"}, description = "Omit the Q in the Wikidata ID.")
+  private boolean numericItems = false;
+
   @Parameter(names = "--help", help = true)
   private boolean help = false;
 
@@ -56,5 +62,13 @@ public final class CliConfig {
       return new FileInputStream(inFile);
     }
     return System.in;
+  }
+
+  public boolean isDescriptions() {
+    return descriptions;
+  }
+
+  public boolean isNumericItems() {
+    return numericItems;
   }
 }
