@@ -153,6 +153,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>com.formulasearchengine.wikidatalistgenerator.Main</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
