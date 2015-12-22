@@ -57,6 +57,7 @@ public class ItemStreamExtractor {
 
   private void processItem(JsonParser jParser, OutputStream out) throws IOException {
     String id = null;
+    StringBuilder description = new StringBuilder();
     // We can not expect that the id attribute comes first, so we have to store all titles
     // until the whole entry is read
     List<String> titles = new ArrayList<>();
@@ -88,8 +89,20 @@ public class ItemStreamExtractor {
             item = true;
           }
           break;
+        case "descriptions":
+          if (useDescriptions) {
+            jParser.nextToken();
+            if (jParser.getCurrentToken() == JsonToken.START_OBJECT) {
+              jParser.nextToken();
+              extractDescription(jParser, description);
+            } else {
+              emitError("expects object start after labels");
+            }
+            break;
+          }
+          // fallthru
         case "aliases":
-          if (useAlias) {
+          if (useAlias && "aliases".equals(jParser.getCurrentName())) {
             jParser.nextToken();
             if (jParser.getCurrentToken() == JsonToken.START_OBJECT) {
               jParser.nextToken();
@@ -99,6 +112,7 @@ public class ItemStreamExtractor {
             }
             break;
           }
+          // fallthru
         default:
           jParser.nextToken();
           if (jParser.getCurrentToken().isStructStart()) {
@@ -111,7 +125,12 @@ public class ItemStreamExtractor {
       OutputStreamWriter w = new OutputStreamWriter(out);
       CSVPrinter printer = CSVFormat.DEFAULT.withRecordSeparator("\n").print(w);
       for (String t : titles) {
-        String[] output = {t.toLowerCase().trim(), id};
+        String[] output;
+        if (useDescriptions && description.length() > 0) {
+          output = new String[]{t.toLowerCase().trim(), id, description.toString()};
+        } else {
+          output = new String[]{t.toLowerCase().trim(), id};
+        }
         printer.printRecord(output);
       }
       w.flush();
@@ -143,6 +162,33 @@ public class ItemStreamExtractor {
     }
     jParser.nextToken();
     extractLabel(jParser, titles);
+  }
+
+  private void extractDescription(JsonParser jParser, StringBuilder description) throws IOException {
+    if (jParser.getCurrentToken() == JsonToken.END_OBJECT) {
+      return;
+    }
+    if (jParser.getCurrentToken() != JsonToken.FIELD_NAME) {
+      emitError("expects field name on top level object");
+    }
+    if (language.equals(jParser.getCurrentName())) {
+      jParser.nextToken();
+      if (jParser.getCurrentToken() == JsonToken.START_OBJECT) {
+        while (jParser.nextToken() != JsonToken.END_OBJECT) {
+          if (jParser.getCurrentName().equals("value")) {
+            jParser.nextToken();
+            description.append(jParser.getValueAsString());
+          }
+        }
+      } else {
+        emitError("language is expected to be an object");
+      }
+    } else {
+      jParser.nextToken();
+      skipBlock(jParser);
+    }
+    jParser.nextToken();
+    extractDescription(jParser, description);
   }
 
   private void extractAlias(JsonParser jParser, List<String> titles) throws IOException {

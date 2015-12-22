@@ -33,4 +33,17 @@ public class ItemStreamExtractorTest {
     assertEquals(6, result.split("\n").length);
     assertThat(result, containsString("the universe"));
   }
+  @Test
+  public void testExtractDescriptions() throws Exception {
+    InputStream is = getClass().getResourceAsStream("sample-q1.json");
+    CliConfig cfg = new CliConfig();
+    cfg.setDescriptions(true);
+    ItemStreamExtractor extractor = new ItemStreamExtractor(cfg);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    extractor.extract(is, baos);
+    final String result = baos.toString();
+    assertEquals(1, result.split("\n").length);
+    assertEquals(7, result.split(",").length);
+    assertThat(result, containsString("intergalactic space"));
+  }
 }

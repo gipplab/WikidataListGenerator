@@ -71,4 +71,19 @@ public final class CliConfig {
   public boolean isNumericItems() {
     return numericItems;
   }
+
+  public CliConfig setAliases(boolean aliases) {
+    this.aliases = aliases;
+    return this;
+  }
+
+  public CliConfig setDescriptions(boolean descriptions) {
+    this.descriptions = descriptions;
+    return this;
+  }
+
+  public CliConfig setNumericItems(boolean numericItems) {
+    this.numericItems = numericItems;
+    return this;
+  }
 }
