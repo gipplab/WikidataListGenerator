@@ -5,7 +5,7 @@
 
     <groupId>com.formulasearchengine</groupId>
     <artifactId>wikidatalistgenerator</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <name>Wikidata List Generator</name>
     <description>Extracts a list of Wikipedia article titles and the corresponding wikidata items.
