@@ -1,5 +1,9 @@
 Wikidata List Generator
 =======================
+[![Build Status](https://travis-ci.org/physikerwelt/WikidataListGenerator.svg?branch=master)](https://travis-ci.org/physikerwelt/WikidataListGenerator)
+[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.formulasearchengine%22)
+[![Coverage Status](https://coveralls.io/repos/physikerwelt/WikidataListGenerator/badge.svg?branch=master&service=github)](https://coveralls.io/github/physikerwelt/WikidataListGenerator?branch=master)
+
 Creates a list of Page titles and their corresponding Wikidata items.
 ## Data download
 Download the json dump [Wikidata database downloads](https://www.wikidata.org/wiki/Wikidata:Database_download) and 
@@ -36,8 +40,3 @@ Probably the time to read the file once.
 
 ## See also
 [Wikibase data model](https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON)
-
-## Build status et al
-[![Build Status](https://travis-ci.org/physikerwelt/WikidataListGenerator.svg?branch=master)](https://travis-ci.org/physikerwelt/WikidataListGenerator)
-[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/physikerwelt/WikidataListGenerator/badge.svg?branch=master&service=github)](https://coveralls.io/github/physikerwelt/WikidataListGenerator?branch=master)
