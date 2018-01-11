@@ -1,7 +1,7 @@
 Wikidata List Generator
 =======================
 [![DOI](https://zenodo.org/badge/48117824.svg)](https://zenodo.org/badge/latestdoi/48117824)
-[![Build Status](https://travis-ci.org/physikerwelt/WikidataListGenerator.svg?branch=master)](https://travis-ci.org/physikerwelt/WikidataListGenerator)
+[![Build Status](https://travis-ci.org/ag-gipp/WikidataListGenerator.svg?branch=master)](https://travis-ci.org/ag-gipp/WikidataListGenerator)
 [![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.formulasearchengine/wikidatalistgenerator/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.formulasearchengine%22)
 [![Coverage Status](https://coveralls.io/repos/physikerwelt/WikidataListGenerator/badge.svg?branch=master&service=github)](https://coveralls.io/github/physikerwelt/WikidataListGenerator?branch=master)
 
